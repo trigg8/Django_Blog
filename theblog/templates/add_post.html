@@ -17,6 +17,12 @@
             <button class="btn btn-secondary">Post</button>
         </form>
     </div>
+
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById("user_selector").value = name;
+    </script>
+
 {% else %}
     <h4> Login to add a post.</h4>
 
