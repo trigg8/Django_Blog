@@ -7,17 +7,20 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-    <h1>Update Post</h1>
-    <br>
-    <div class="form-group">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <button class="btn btn-secondary">Update</button>
-        </form>
-    </div>
+    {% if user.id == post.author.id %}
+        <h1>Update Post</h1>
+        <br>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p}}
+                <button class="btn btn-secondary">Update</button>
+            </form>
+        </div>
+    {% else %}
+        <h4> Login in to the correct user to edit this post.</h4>
+    {% endif %}
 {% else %}
     <h4> Login to edit this post.</h4>
-
 {% endif %}
 {% endblock %}
