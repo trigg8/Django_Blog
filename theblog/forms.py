@@ -16,7 +16,7 @@ sorted_choice_list = sorted(choice_list)
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'author', 'category', 'snippet', 'body',)
+        fields = ('title', 'author', 'category', 'snippet', 'body','header_image')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
