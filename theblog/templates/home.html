@@ -23,7 +23,8 @@
     {% else %}
         <br>
     {% endif %}
-    {{ post.body|slice:":200"|safe }}</li>
+    {{ post.snippet }}
+    </li>
 {% endfor%}
 </ul>
 
