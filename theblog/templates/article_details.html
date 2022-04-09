@@ -97,7 +97,7 @@
       No Comments Yet <a href="{% url 'add_comment' post.pk %}">Add One</a>
   {% else %}
       {% for comment in post.comments.all %}
-          <strong>{{ comment.user }} - {{ comment.date_added }}</strong>
+          <strong>{{ comment.user.first_name }} {{comment.user.last_name}} - {{ comment.date_added }}</strong>
         {% if user.is_authenticated %}
             {% if user.id == comment.user.id %}
                 <small>
