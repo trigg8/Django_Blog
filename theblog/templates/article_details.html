@@ -23,7 +23,7 @@
 <br>
 {% if post.header_image %}
 <img src= "{{ post.header_image.url }}" style="width: 35rem; height: 25rem;">
-<br>
+<br><br>
 {% endif %}
 {{ post.body|safe }}
 
@@ -48,24 +48,7 @@
     {% endif %}
     - {{ total_likes }} Likes
 </form>
-
 <hr>
-
-<h2>Comments</h2>
-<br>
-{% if not post.comments.all %}
-    No Comments Yet <a href="#">Add One</a>
-{% else %}
-    {% for comment in post.comments.all %}
-        <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
-        <br>
-        {{ comment.body }}
-        <br><br>
-    {% endfor %}
-{% endif %}
-<hr>
-<br>
-<br>
 <br>
 <div class="card mb-3">
     <div class="row g-0">
@@ -105,7 +88,24 @@
       </div>
     </div>
   </div>
-<br>
+  
+  <br>
+  <hr>
+  <h2>Comments<a href="{% url 'add_comment' post.pk %}" class="btn btn-primary" style="float:right;">Add Comment</a></h2>
+  <br>
+  {% if not post.comments.all %}
+      No Comments Yet <a href="{% url 'add_comment' post.pk %}">Add One</a>
+  {% else %}
+      {% for comment in post.comments.all %}
+          <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
+          <br>
+          {{ comment.body }}
+          <br><br>
+      {% endfor %}
+  {% endif %}
+  <hr>
+  <br>
+  
 <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
 
 {% endblock %}

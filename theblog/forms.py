@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category
+from .models import Post, Category, Comment
 
 # Hard code catogries not dynmic will not use for this use case
 #choices = [('coding', 'coding'), ('writing', 'writing'), ('sports', 'sports'), ('entertainment', 'entertainment')]
@@ -36,5 +36,15 @@ class EditForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(choices= sorted_choice_list, attrs={'class': 'form-control'}), #choices must be before attrs
             'snippet': forms.Textarea(attrs={'class': 'form-control'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'body',)
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
