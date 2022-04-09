@@ -11,10 +11,21 @@
 <div class="form-group">
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-secondary">
-            Login
-        </button>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" name="username">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <br>
+            <button class="btn btn-secondary">
+                Login
+            </button>
+          <br>
+          <br>
+            <small><p>Not registered yet? <a href="{% url 'register' %}">Create an Account.</a></p></small>
     </form>
 </div>
 
