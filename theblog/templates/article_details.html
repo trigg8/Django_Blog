@@ -98,6 +98,18 @@
   {% else %}
       {% for comment in post.comments.all %}
           <strong>{{ comment.user }} - {{ comment.date_added }}</strong>
+        {% if user.is_authenticated %}
+            {% if user.id == comment.user.id %}
+                <small>
+                    <a href="{% url 'edit_comment' comment.pk %}">[Edit]</a>
+                    <a href="{% url 'delete_post' post.pk %}">[Delete]</a>
+                </small><br>
+            {% else %}
+                <br>
+            {% endif %}
+        {% else %}
+            <br>
+        {% endif %}
           <br>
           {{ comment.body }}
           <br><br>

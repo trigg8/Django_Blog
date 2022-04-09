@@ -96,10 +96,13 @@ class UpdatePostView(UpdateView):
 class UpdateCommentView(UpdateView):
     model = Comment
     form_class = CommentForm
+    template_name = 'update_comment.html'
 
     def get_success_url(self):
         post_id = self.object.post.id
         return reverse_lazy('article-detail', kwargs = {'pk': post_id})
+
+
 
 class DeletePostView(DeleteView):
     model = Post

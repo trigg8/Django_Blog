@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Update Comment
+{% endblock %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == comment.user.id %}    
+        <h1>Update Comment</h1>
+        <br>
+        <div class="form-group">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="btn btn-secondary">Update Comment</button>
+            </form>
+        </div>
+
+        <!--<script>
+            var name = "{{ user.id }}";
+            document.getElementById("user_selector").value = name;
+        </script>-->
+    {% else %}
+        <h4>Login to the correct user to update this comment.</h4>
+    {% endif %}
+{% else %}
+    <h4> Login to update comment on this post.</h4>
+
+{% endif %}
+{% endblock %}
