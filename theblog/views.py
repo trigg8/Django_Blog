@@ -5,7 +5,6 @@ from .forms import EditForm, PostForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
-
 #def home(request):
 #    return render(request, 'home.html', {})
 
@@ -73,8 +72,11 @@ class AddCommentView(CreateView):
     form_class = CommentForm
     template_name = 'add_comment.html'
     
+    
     def form_valid(self,form):
         form.instance.post_id = self.kwargs['pk']
+        user = self.request.user
+        form.instance.user = user
         return super().form_valid(form)
     
     def get_success_url(self):
@@ -90,6 +92,14 @@ class UpdatePostView(UpdateView):
     model = Post
     form_class = EditForm
     template_name = 'update_post.html'
+
+class UpdateCommentView(UpdateView):
+    model = Comment
+    form_class = CommentForm
+
+    def get_success_url(self):
+        post_id = self.object.post.id
+        return reverse_lazy('article-detail', kwargs = {'pk': post_id})
 
 class DeletePostView(DeleteView):
     model = Post

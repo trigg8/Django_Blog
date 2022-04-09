@@ -1,5 +1,6 @@
 from django import forms
 from .models import Post, Category, Comment
+from django.contrib.auth.models import User
 
 # Hard code catogries not dynmic will not use for this use case
 #choices = [('coding', 'coding'), ('writing', 'writing'), ('sports', 'sports'), ('entertainment', 'entertainment')]
@@ -40,11 +41,11 @@ class EditForm(forms.ModelForm):
         }
 
 class CommentForm(forms.ModelForm):
+    body = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+    
     class Meta:
         model = Comment
-        fields = ('name', 'body',)
+        fields = ( 'body',)
 
-        widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-        }
+        def __init__(self, *args, **kwargs):
+            super(CommentForm, self).__init__(*args, **kwargs)
